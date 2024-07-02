@@ -7,16 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public class PostService {
     private PostsRepository repository;
 
     @Autowired
     public PostService(PostsRepository repository) {
         this.repository = repository;
-    }
-    public List<Posts> readAllPost(){
-        return repository.findAll();
     }
     public Posts writePost(Posts postForm){
         return repository.save(postForm);

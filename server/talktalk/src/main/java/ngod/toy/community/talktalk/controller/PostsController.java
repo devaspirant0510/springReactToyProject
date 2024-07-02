@@ -24,7 +24,10 @@ public class PostsController {
     @GetMapping("/home")
     String homePage(HttpSession session, Model model){
         User user = (User)session.getAttribute("user");
+        List<Posts> postList = postService.readAllPosts();
+        System.out.println(postList);
         model.addAttribute("user",user);
+        model.addAttribute("posts",postList);
         return "home";
     }
     @GetMapping("/posts")
@@ -36,7 +39,8 @@ public class PostsController {
             @RequestParam String title,
             @RequestParam String content,
             @RequestParam Long userId,
-            Model model
+            Model model,
+            HttpSession session
     ){
         Posts posts = new Posts();
         posts.setContent(content);
@@ -45,7 +49,9 @@ public class PostsController {
         Posts writedPOst = postService.writePost(posts);
         System.out.println(writedPOst);
         List<Posts> postList = postService.readAllPosts();
+        User user = (User)session.getAttribute("user");
         model.addAttribute("posts",postList);
+        model.addAttribute("user",user);
         return "home";
 
     }

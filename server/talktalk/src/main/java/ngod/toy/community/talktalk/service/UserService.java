@@ -6,7 +6,6 @@ import ngod.toy.community.talktalk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class UserService {
     private final UserRepository repository;
 

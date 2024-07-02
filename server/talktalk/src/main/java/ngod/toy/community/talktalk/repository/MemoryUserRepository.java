@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class MemoryUserRepository implements UserRepository {
     public ArrayList<User> userList = new ArrayList<>();
     private Long id = 1L;
