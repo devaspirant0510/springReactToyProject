@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main style="display: flex; justify-content: center; flex-direction: column">
+    <section style="padding: 15px; margin: 10px; elevation: above; border: 1px solid #999; border-radius: 20px">
+        <div th:if="${user}" style="display: flex;">
+            <img th:src="${user.profileUrl}" alt="hina of QWER" th:width="50" th:height="50"
+                 style="border-radius: 100px">
+            <div th:text="${user.userName}"></div>
+        </div>
+    </section>
+    <div th:unless="${user}">
+        <a href="/">로그인해주세요</a>
+    </div>
+    <section th:if="${user}">
+        <div>
+            <span th:text="'작성자 :'+${user.userName}"> 작성자 </span>
+        </div>
+        <form action="/posts" method="post">
+            <label>
+                글 제목
+                <input name="title">
+            </label>
+            <label>
+                글 내용
+                <input name="content" minlength="10">
+            </label>
+            <input name="userId" th:value="${user.userId}" type="hidden">
+            <button type="submit">작성</button>
+        </form>
+    </section>
+    <main th:each="post:${posts}">
+        <div>
+            <div th:text="${post.title}"></div>
+            <div th:text="${post.content}"></div>
+        </div>
+
+    </main>
+
+</main>
+
+</body>
+</html>

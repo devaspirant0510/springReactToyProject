@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main style="display: flex; justify-content: center; flex-direction: column">
+    <div>
+        <div>
+            <span> 작성자 </span>
+            <div>
+                <img src="">
+                <span>닉네임</span>
+            </div>
+        </div>
+        <form action="/posts" method="post">
+            <label>
+                글 제목
+                <input name="title">
+            </label>
+            <label>
+                글 내용
+                <input name="desc" minlength="10">
+            </label>
+        </form>
+    </div>
+
+</main>
+
+</body>
+</html>

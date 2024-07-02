@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main style="display: flex">
+    <section
+            style="flex: 1; margin: 10px; border: 1px solid #999; border-radius: 20px; height: 80vh; display: flex; align-items: center; flex-direction: column">
+        <h1 style="text-align: center">
+            로그인
+        </h1>
+        <form action="/user/login" method="post">
+            <label>
+                아이디
+                <input placeholder="ID : " name="userId">
+            </label><br>
+            <label>
+                비번
+                <input placeholder="Pwd : " name="password">
+            </label><br>
+            <button type="submit">
+                로그인
+            </button>
+
+        </form>
+    </section>
+    <section
+            style="flex: 1; margin: 10px; border: 1px solid #999; border-radius: 20px; height: 80vh; display: flex; align-items: center; flex-direction: column">
+        <h1 style="text-align: center">
+            회원가입
+        </h1>
+        <form action="/user/join" method="post">
+            <label>
+                아이디
+                <input placeholder="ID : " name="userId">
+            </label><br>
+            <label>
+                비번
+                <input placeholder="Pwd : " name="password">
+            </label><br>
+            <label>
+                닉네임
+                <input placeholder="nickname : " name="userName">
+            </label><br>
+            <button type="submit">
+                가입하기
+            </button>
+        </form>
+
+    </section>
+
+
+</main>
+
+</body>
+</html>
