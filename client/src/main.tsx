@@ -4,6 +4,10 @@ import HomePage from './pages/home/HomePage.tsx';
 import { ChakraProvider } from '@chakra-ui/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginPage from './pages/login/LoginPage.tsx';
+import RegisterPage from './pages/register/RegisterPage.tsx';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 async function enableMocking() {
 	if (process.env.NODE_ENV !== 'development') {
@@ -19,19 +23,29 @@ async function enableMocking() {
 
 const router = createBrowserRouter([
 	{
-		path:'/',
-		element:<HomePage/>
+		path: '/',
+		element: <HomePage />,
 
-	}
-])
+	},
+	{
+		path: '/login',
+		element: <LoginPage />,
+	},
+	{
+		path: '/register',
+		element: <RegisterPage />,
+	},
+]);
+
 const queryClient = new QueryClient();
 
-enableMocking().then(()=>{
+enableMocking().then(() => {
 	ReactDOM.createRoot(document.getElementById('root')!).render(
 		<ChakraProvider>
 			<QueryClientProvider client={queryClient}>
-				<RouterProvider router={router}/>
+				<RouterProvider router={router} />
+				<ToastContainer />
 			</QueryClientProvider>
-		</ChakraProvider>
+		</ChakraProvider>,
 	);
-})
+});
