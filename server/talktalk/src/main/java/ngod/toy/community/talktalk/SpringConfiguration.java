@@ -6,11 +6,24 @@ import ngod.toy.community.talktalk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class SpringConfiguration {
+public class SpringConfiguration implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("Authorization", "Content-Type")
+                .exposedHeaders("Custom-Header")
+                .allowCredentials(true)
+                .maxAge(3600);
+    }
+
     private final DataSource dataSource;
 
     @Autowired

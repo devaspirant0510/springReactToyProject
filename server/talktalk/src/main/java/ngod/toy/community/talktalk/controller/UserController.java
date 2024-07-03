@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:5173", allowedHeaders = "*")
 public class UserController {
     private UserService service;
 
@@ -34,6 +35,12 @@ public class UserController {
         Long joinUserId = service.registerUser(userName, userId, password);
         return "redirect:/";
     }
+    @PostMapping("/api/user/join")
+    @ResponseBody
+    User joinUser(@RequestBody RegisterUserForm form, Model model, HttpSession session) {
+        Long joinUserId = service.registerUser(form.getUserName(), form.getUserId(), form.getPassword());
+        return service.getUser(joinUserId);
+    }
 
     @PostMapping("/user/login")
     String loginUser(
@@ -44,6 +51,14 @@ public class UserController {
         User user = service.login(userId,password);
         session.setAttribute("user",user);
         return "redirect:/home";
+    }
+    @PostMapping("/api/user/login")
+    @ResponseBody
+    User loginUser(
+            @RequestBody LoginUserForm form,
+            HttpSession session
+    ){
+        return service.login(form.getUserId(),form.getPassword());
     }
 
 }
