@@ -1,6 +1,6 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.model.User;
+import ngod.toy.community.talktalk.entity.User;
 
 import java.util.List;
 import java.util.Optional;

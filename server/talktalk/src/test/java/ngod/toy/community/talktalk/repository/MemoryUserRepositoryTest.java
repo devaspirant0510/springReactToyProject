@@ -1,12 +1,8 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.model.User;
+import ngod.toy.community.talktalk.entity.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryUserRepositoryTest {
     MemoryUserRepository repository = new MemoryUserRepository();

@@ -1,9 +1,8 @@
 package ngod.toy.community.talktalk.service;
 
-import ngod.toy.community.talktalk.model.Posts;
+import ngod.toy.community.talktalk.entity.Posts;
 import ngod.toy.community.talktalk.repository.PostsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

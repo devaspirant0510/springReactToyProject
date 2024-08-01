@@ -1,4 +1,4 @@
-package ngod.toy.community.talktalk.model;
+package ngod.toy.community.talktalk.entity;
 
 import jakarta.persistence.*;
 

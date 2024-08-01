@@ -1,7 +1,6 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.model.Posts;
-import org.springframework.stereotype.Repository;
+import ngod.toy.community.talktalk.entity.Posts;
 
 import java.util.ArrayList;
 import java.util.List;

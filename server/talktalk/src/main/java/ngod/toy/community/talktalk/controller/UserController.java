@@ -1,7 +1,9 @@
 package ngod.toy.community.talktalk.controller;
 
 import jakarta.servlet.http.HttpSession;
-import ngod.toy.community.talktalk.model.User;
+import ngod.toy.community.talktalk.entity.User;
+import ngod.toy.community.talktalk.model.LoginUserForm;
+import ngod.toy.community.talktalk.model.RegisterUserForm;
 import ngod.toy.community.talktalk.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +18,7 @@ public class UserController {
         this.service = service;
     }
 
-    @GetMapping("/")
-    String userPage(){
-        return "user";
-    }
-
-    @GetMapping("/user")
+    @GetMapping("/api/user")
     @ResponseBody
     User getUser() {
         User user = new User();
@@ -30,11 +27,6 @@ public class UserController {
         return service.getUser(userId);
     }
 
-    @PostMapping("/user/join")
-    String joinUser(@RequestParam String userName, @RequestParam String userId, @RequestParam String password, Model model, HttpSession session) {
-        Long joinUserId = service.registerUser(userName, userId, password);
-        return "redirect:/";
-    }
     @PostMapping("/api/user/join")
     @ResponseBody
     User joinUser(@RequestBody RegisterUserForm form, Model model, HttpSession session) {
@@ -42,16 +34,6 @@ public class UserController {
         return service.getUser(joinUserId);
     }
 
-    @PostMapping("/user/login")
-    String loginUser(
-            @RequestParam String userId,
-            @RequestParam String password,
-            HttpSession session
-    ){
-        User user = service.login(userId,password);
-        session.setAttribute("user",user);
-        return "redirect:/home";
-    }
     @PostMapping("/api/user/login")
     @ResponseBody
     User loginUser(

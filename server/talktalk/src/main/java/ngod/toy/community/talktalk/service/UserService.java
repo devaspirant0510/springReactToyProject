@@ -1,10 +1,8 @@
 package ngod.toy.community.talktalk.service;
 
-import ngod.toy.community.talktalk.model.User;
-import ngod.toy.community.talktalk.repository.MemoryUserRepository;
+import ngod.toy.community.talktalk.entity.User;
 import ngod.toy.community.talktalk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 public class UserService {
     private final UserRepository repository;

@@ -1,7 +1,6 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.model.Posts;
-import ngod.toy.community.talktalk.model.User;
+import ngod.toy.community.talktalk.entity.Posts;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;

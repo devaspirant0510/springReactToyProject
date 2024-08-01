@@ -1,10 +1,19 @@
-package ngod.toy.community.talktalk.controller;
+package ngod.toy.community.talktalk.model;
 
-public class LoginUserForm {
+public class RegisterUserForm {
+    private String userName;
     private String userId;
     private String password;
 
     // Getters and setters
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public String getUserId() {
         return userId;
     }
