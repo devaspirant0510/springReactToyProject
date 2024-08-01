@@ -10,19 +10,22 @@ import {
 	Flex,
 	Heading,
 	CardBody,
-	CardFooter,
+	CardFooter, useDisclosure, Modal, ModalOverlay, ModalContent,
 } from '@chakra-ui/react';
 import GuestInfoPage from './components/GuestInfoPage.tsx';
 import { User } from '../../entity/User.ts';
 import ProfileCard from './components/ProfileCard.tsx';
-import PostsPage from './components/PostsPage.tsx';
+import PostListPage from './components/PostListPage.tsx';
 import { useNavigate } from 'react-router-dom';
+import PostFormModal from './components/PostFormModal.tsx';
 
 
 const HomePage = () => {
 	const [isLogin, setLogin] = useState(false);
 	const [loginUser, setUser] = useState<User | null>(null);
 	const navigate = useNavigate();
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
 	useLayoutEffect(() => {
 		if (localStorage.getItem('user')) {
 			setUser(JSON.parse(localStorage.getItem('user')));
@@ -56,7 +59,9 @@ const HomePage = () => {
 				</Card>
 			</Box>
 			<Box flex={2}>
-				<PostsPage />
+				<Button onClick={onOpen}>작성하기</Button>
+				<PostFormModal isOpen={isOpen} onClose={onClose}/>
+				<PostListPage />
 			</Box>
 		</Flex>
 	);

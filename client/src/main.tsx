@@ -8,6 +8,8 @@ import LoginPage from './pages/login/LoginPage.tsx';
 import RegisterPage from './pages/register/RegisterPage.tsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PostListPage from './pages/home/components/PostListPage.tsx';
+import PostPage from './pages/post/PostPage.tsx';
 
 async function enableMocking() {
 	if (process.env.NODE_ENV !== 'development') {
@@ -35,6 +37,10 @@ const router = createBrowserRouter([
 		path: '/register',
 		element: <RegisterPage />,
 	},
+	{
+		path:'/post/:id',
+		element:<PostPage/>
+	}
 ]);
 
 const queryClient = new QueryClient();

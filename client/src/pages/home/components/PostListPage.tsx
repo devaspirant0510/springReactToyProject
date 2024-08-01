@@ -1,25 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { urlFetcher } from '../../../common/urlFetcher.ts';
 import { Posts } from '../../../entity/Posts.ts';
-import { Card, CardBody, CardHeader, Flex, Heading,Text } from '@chakra-ui/react';
+import { Card, CardBody, CardHeader, Flex, Heading, Text } from '@chakra-ui/react';
 import { convertDate } from '../../../libs/dateLibs.ts';
+import { useNavigate } from 'react-router-dom';
 
-const PostsPage = () => {
+const PostListPage = () => {
+	const navigate = useNavigate();
 	const { isLoading, data } = useQuery({
-		queryKey: ['posts'],
+		queryKey: ['api/posts'],
 		queryFn: urlFetcher<Posts[]>,
 	});
 	console.log(data);
 	if (isLoading) {
 		return <>
-			로딩중이다 개이들아
+			로딩중
 		</>;
 	}
 	return (
 		<>
-
 			{data?.map(((item, key) => {
-				return <Card key={key} marginBottom={4}>
+				console.log(item);
+				return <Card key={key} marginBottom={4} onClick={()=>{
+					navigate("/post/"+item.id);
+
+				}}>
 					<CardHeader>
 						<Flex justifyContent={'space-between'} alignItems={'center'} gap={2}>
 							<Heading size={'sm'}>
@@ -38,4 +43,4 @@ const PostsPage = () => {
 		</>
 	);
 };
-export default PostsPage;
+export default PostListPage;
