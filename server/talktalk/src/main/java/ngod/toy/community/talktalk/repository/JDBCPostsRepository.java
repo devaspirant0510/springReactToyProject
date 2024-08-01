@@ -34,8 +34,9 @@ public class JDBCPostsRepository implements PostsRepository{
             pstmt.executeUpdate();
             resultSet = pstmt.getGeneratedKeys();
             if(resultSet.next()){
-                post.setCratedAt(resultSet.getString(resultSet.findColumn("created_at")));
+                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
                 post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
+                post.setId(resultSet.getLong(resultSet.findColumn("id")));
                 return post;
             }else{
                 throw new IllegalStateException("글 작성하는 도중 오류가 발생했습니다 다시 시도해주세요");
@@ -51,7 +52,7 @@ public class JDBCPostsRepository implements PostsRepository{
 
     @Override
     public List<Posts> findAll() {
-        String sql = "SELECT * from POSTS_T";
+        String sql = "SELECT * from POSTS_T order by created_at DESC";
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet resultSet = null;
@@ -64,7 +65,7 @@ public class JDBCPostsRepository implements PostsRepository{
                 Posts post = new Posts();
                 post.setId(resultSet.getLong(resultSet.findColumn("id")));
                 post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
-                post.setCratedAt(resultSet.getString(resultSet.findColumn("created_at")));
+                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
                 post.setTitle(resultSet.getString(resultSet.findColumn("title")));
                 post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
                 post.setContent(resultSet.getString(resultSet.findColumn("content")));
@@ -85,7 +86,34 @@ public class JDBCPostsRepository implements PostsRepository{
 
     @Override
     public Optional<Posts> findById(Long id) {
-        return Optional.empty();
+        String sql = "SELECT * from POSTS_T where id=?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet resultSet = null;
+        try{
+            conn = getConnection();
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1,id);
+            resultSet = pstmt.executeQuery();
+            Posts post = new Posts();
+            while(resultSet.next()){
+                post.setId(resultSet.getLong(resultSet.findColumn("id")));
+                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
+                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
+                post.setTitle(resultSet.getString(resultSet.findColumn("title")));
+                post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
+                post.setContent(resultSet.getString(resultSet.findColumn("content")));
+                return Optional.of(post);
+            }
+            return Optional.empty();
+
+
+        }catch (SQLException e){
+            throw new IllegalStateException("데이터베이스 에러 : "+e);
+        }
+        finally {
+            close(conn,pstmt,resultSet);
+        }
     }
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
         try {

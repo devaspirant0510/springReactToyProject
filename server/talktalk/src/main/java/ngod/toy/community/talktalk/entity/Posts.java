@@ -14,11 +14,19 @@ public class Posts {
     private String title;
     private String content;
 
-    @Column(name = "crated_at")
-    private String cratedAt;
+    @Column(name = "created_at")
+    private String createdAt;
 
     @Column(name = "updated_at")
     private String updatedAt;
+
+    public Posts(){}
+
+    public Posts(Long userId, String title, String content) {
+        this.userId = userId;
+        this.title = title;
+        this.content = content;
+    }
 
     public Long getId() {
         return id;
@@ -52,12 +60,12 @@ public class Posts {
         this.content = content;
     }
 
-    public String getCratedAt() {
-        return cratedAt;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCratedAt(String cratedAt) {
-        this.cratedAt = cratedAt;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getUpdatedAt() {
