@@ -1,6 +1,6 @@
 package ngod.toy.community.talktalk.controller;
 
-import ngod.toy.community.talktalk.entity.Posts;
+import ngod.toy.community.talktalk.entity.Post;
 import ngod.toy.community.talktalk.model.PostForm;
 import ngod.toy.community.talktalk.service.PostService;
 import org.springframework.stereotype.Controller;
@@ -19,20 +19,20 @@ public class PostsController {
 
     @GetMapping("/api/posts")
     @ResponseBody
-    List<Posts> readAllPost() {
+    List<Post> readAllPost() {
         return postService.readAllPosts();
     }
 
     @GetMapping("/api/post/{id}")
     @ResponseBody
-    Posts readOnePost(@PathVariable("id") Long id){
+    Post readOnePost(@PathVariable("id") Long id){
         System.out.println(id);
         return postService.readOneById(id);
     }
 
     @PostMapping("/api/post")
     @ResponseBody
-    Posts savePosts(@RequestBody PostForm form) {
+    Post savePosts(@RequestBody PostForm form) {
         return postService.writePost(form);
     }
 

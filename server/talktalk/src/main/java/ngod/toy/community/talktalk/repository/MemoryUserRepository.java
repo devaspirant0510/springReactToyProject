@@ -1,39 +1,40 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.entity.User;
+import ngod.toy.community.talktalk.entity.Account;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MemoryUserRepository implements UserRepository {
-    public ArrayList<User> userList = new ArrayList<>();
+@Deprecated
+public class MemoryUserRepository implements AccountRepository {
+    public ArrayList<Account> accountList = new ArrayList<>();
     private Long id = 1L;
 
     @Override
-    public User save(User user) {
-        user.setId(id++);
-        userList.add(user);
-        return user;
+    public Account save(Account account) {
+        account.setId(id++);
+        accountList.add(account);
+        return account;
     }
 
     @Override
-    public List<User> findAll() {
-        return userList;
+    public List<Account> findAll() {
+        return accountList;
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return userList.stream().filter(user -> user.getId().equals(id)).findAny();
+    public Optional<Account> findById(Long id) {
+        return accountList.stream().filter(user -> user.getId().equals(id)).findAny();
     }
 
     @Override
-    public Optional<User> findByUserId(String userId) {
-        return userList.stream().filter(user -> user.getUserId().equals(userId)).findAny();
+    public Optional<Account> findByUserId(String userId) {
+        return accountList.stream().filter(user -> user.getUserId().equals(userId)).findAny();
     }
 
     @Override
-    public Optional<User> findByIdByPassword(String userId, String password) {
-        return  userList.stream().filter(user -> user.getUserId().equals(userId)&&user.getPassword().equals(password)).findAny();
+    public Optional<Account> findByIdByPassword(String userId, String password) {
+        return  accountList.stream().filter(user -> user.getUserId().equals(userId)&&user.getPassword().equals(password)).findAny();
     }
 }

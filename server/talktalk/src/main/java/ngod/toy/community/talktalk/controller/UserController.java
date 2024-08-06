@@ -1,7 +1,7 @@
 package ngod.toy.community.talktalk.controller;
 
 import jakarta.servlet.http.HttpSession;
-import ngod.toy.community.talktalk.entity.User;
+import ngod.toy.community.talktalk.entity.Account;
 import ngod.toy.community.talktalk.model.LoginUserForm;
 import ngod.toy.community.talktalk.model.RegisterUserForm;
 import ngod.toy.community.talktalk.service.UserService;
@@ -20,23 +20,23 @@ public class UserController {
 
     @GetMapping("/api/user")
     @ResponseBody
-    User getUser() {
-        User user = new User();
-        user.setUserName("seungho");
-        Long userId = service.registerUser(user);
+    Account getUser() {
+        Account account = new Account();
+        account.setUserName("seungho");
+        Long userId = service.registerUser(account);
         return service.getUser(userId);
     }
 
     @PostMapping("/api/user/join")
     @ResponseBody
-    User joinUser(@RequestBody RegisterUserForm form, Model model, HttpSession session) {
+    Account joinUser(@RequestBody RegisterUserForm form, Model model, HttpSession session) {
         Long joinUserId = service.registerUser(form.getUserName(), form.getUserId(), form.getPassword());
         return service.getUser(joinUserId);
     }
 
     @PostMapping("/api/user/login")
     @ResponseBody
-    User loginUser(
+    Account loginUser(
             @RequestBody LoginUserForm form,
             HttpSession session
     ){

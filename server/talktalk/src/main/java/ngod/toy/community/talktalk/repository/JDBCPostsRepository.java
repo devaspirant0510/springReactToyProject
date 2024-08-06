@@ -1,6 +1,6 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.entity.Posts;
+import ngod.toy.community.talktalk.entity.Post;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import javax.sql.DataSource;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class JDBCPostsRepository implements PostsRepository{
     private final DataSource dataSource;
 
@@ -20,7 +21,7 @@ public class JDBCPostsRepository implements PostsRepository{
     }
 
     @Override
-    public Posts save(Posts post) {
+    public Post save(Post post) {
         String sql = "INSERT INTO POSTS_T (title, content, user_id) VALUES (?,?,?)";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -30,12 +31,12 @@ public class JDBCPostsRepository implements PostsRepository{
             pstmt = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
             pstmt.setString(1,post.getTitle());
             pstmt.setString(2,post.getContent());
-            pstmt.setLong(3,post.getUserId());
+//            pstmt.setLong(3,post.getUserId());
             pstmt.executeUpdate();
             resultSet = pstmt.getGeneratedKeys();
             if(resultSet.next()){
-                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
-                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
+//                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
+//                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
                 post.setId(resultSet.getLong(resultSet.findColumn("id")));
                 return post;
             }else{
@@ -51,7 +52,7 @@ public class JDBCPostsRepository implements PostsRepository{
     }
 
     @Override
-    public List<Posts> findAll() {
+    public List<Post> findAll() {
         String sql = "SELECT * from POSTS_T order by created_at DESC";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -60,14 +61,14 @@ public class JDBCPostsRepository implements PostsRepository{
             conn = getConnection();
             pstmt = conn.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
-            List<Posts> postList = new ArrayList<>();
+            List<Post> postList = new ArrayList<>();
             while(resultSet.next()){
-                Posts post = new Posts();
+                Post post = new Post();
                 post.setId(resultSet.getLong(resultSet.findColumn("id")));
-                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
-                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
+//                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
+//                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
                 post.setTitle(resultSet.getString(resultSet.findColumn("title")));
-                post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
+//                post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
                 post.setContent(resultSet.getString(resultSet.findColumn("content")));
                 postList.add(post);
 
@@ -85,7 +86,7 @@ public class JDBCPostsRepository implements PostsRepository{
     }
 
     @Override
-    public Optional<Posts> findById(Long id) {
+    public Optional<Post> findById(Long id) {
         String sql = "SELECT * from POSTS_T where id=?";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -95,13 +96,13 @@ public class JDBCPostsRepository implements PostsRepository{
             pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1,id);
             resultSet = pstmt.executeQuery();
-            Posts post = new Posts();
+            Post post = new Post();
             while(resultSet.next()){
                 post.setId(resultSet.getLong(resultSet.findColumn("id")));
-                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
-                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
+//                post.setUpdatedAt(resultSet.getString(resultSet.findColumn("updated_at")));
+//                post.setCreatedAt(resultSet.getString(resultSet.findColumn("created_at")));
                 post.setTitle(resultSet.getString(resultSet.findColumn("title")));
-                post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
+//                post.setUserId(resultSet.getLong(resultSet.findColumn("user_id")));
                 post.setContent(resultSet.getString(resultSet.findColumn("content")));
                 return Optional.of(post);
             }

@@ -6,11 +6,14 @@ import ngod.toy.community.talktalk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
 
+
+@EnableTransactionManagement
 @Configuration
 public class SpringConfiguration implements WebMvcConfigurer {
     @Override
@@ -33,21 +36,12 @@ public class SpringConfiguration implements WebMvcConfigurer {
 
     @Bean
     UserService getUserService(){
-        return new UserService(getUserRepository());
-    }
-
-    @Bean
-    UserRepository getUserRepository(){
-        return new JDBCUserRepository(dataSource);
+        return new UserService();
     }
 
     @Bean
     PostService getPostService(){
-        return new PostService(getPostRepository());
+        return new PostService();
     }
 
-    @Bean
-    PostsRepository getPostRepository(){
-        return new JDBCPostsRepository(dataSource);
-    }
 }

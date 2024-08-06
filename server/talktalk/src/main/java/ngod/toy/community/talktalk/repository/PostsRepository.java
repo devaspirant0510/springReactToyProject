@@ -1,12 +1,12 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.entity.Posts;
+import ngod.toy.community.talktalk.entity.Post;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PostsRepository {
-    Posts save(Posts post);
-    List<Posts> findAll();
-    Optional<Posts> findById(Long id);
+    Post save(Post post);
+    List<Post> findAll();
+    Optional<Post> findById(Long id);
 }

@@ -7,20 +7,20 @@
 <body>
 <main style="display: flex; justify-content: center; flex-direction: column">
     <section style="padding: 15px; margin: 10px; elevation: above; border: 1px solid #999; border-radius: 20px">
-        <div th:if="${user}" style="display: flex;">
-            <img th:src="${user.profileUrl}" alt="hina of QWER" th:width="50" th:height="50"
+        <div th:if="${account}" style="display: flex;">
+            <img th:src="${account.profileUrl}" alt="hina of QWER" th:width="50" th:height="50"
                  style="border-radius: 100px">
-            <div th:text="${user.userName}"></div>
+            <div th:text="${account.userName}"></div>
         </div>
     </section>
-    <div th:unless="${user}">
+    <div th:unless="${account}">
         <a href="/">로그인해주세요</a>
     </div>
-    <section th:if="${user}">
+    <section th:if="${account}">
         <div>
-            <span th:text="'작성자 :'+${user.userName}"> 작성자 </span>
+            <span th:text="'작성자 :'+${account.userName}"> 작성자 </span>
         </div>
-        <form action="/posts" method="post">
+        <form action="/post" method="post">
             <label>
                 글 제목
                 <input name="title">
@@ -29,11 +29,11 @@
                 글 내용
                 <input name="content" minlength="10">
             </label>
-            <input name="userId" th:value="${user.userId}" type="hidden">
+            <input name="userId" th:value="${account.userId}" type="hidden">
             <button type="submit">작성</button>
         </form>
     </section>
-    <main th:each="post:${posts}">
+    <main th:each="post:${post}">
         <div>
             <div th:text="${post.title}"></div>
             <div th:text="${post.content}"></div>

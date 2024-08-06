@@ -1,29 +1,30 @@
 package ngod.toy.community.talktalk.repository;
 
-import ngod.toy.community.talktalk.entity.Posts;
+import ngod.toy.community.talktalk.entity.Post;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Deprecated
 public class MemoryPostsRepository implements PostsRepository{
-    List<Posts> posts = new ArrayList<>();
+    List<Post> posts = new ArrayList<>();
     Long id = 1L;
 
     @Override
-    public Posts save(Posts post) {
+    public Post save(Post post) {
         post.setId(id++);
         posts.add(post);
         return post;
     }
 
     @Override
-    public List<Posts> findAll() {
+    public List<Post> findAll() {
         return posts;
     }
 
     @Override
-    public Optional<Posts> findById(Long id) {
+    public Optional<Post> findById(Long id) {
         return posts.stream().filter(data->data.getId().equals(id)).findAny();
     }
 }
